@@ -6,12 +6,10 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @NoArgsConstructor
 @Entity
-public class Model implements Serializable {
+public class Model{
     @Id
     @GeneratedValue
     private Long id;
