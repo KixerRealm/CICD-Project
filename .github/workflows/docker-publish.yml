@@ -24,5 +24,4 @@ jobs:
       -
         name: Build and push
         run: |
-          pwd
           ls
