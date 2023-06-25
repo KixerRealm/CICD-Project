@@ -4,6 +4,7 @@ import com.example.backend.model.Model;
 import com.example.backend.model.dto.ModelDto;
 import com.example.backend.service.ModelService;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,5 +27,10 @@ public class ModelController {
         return this.modelService.add(modelDto)
                 .map(model -> ResponseEntity.ok().body(model))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
+    @GetMapping("/test")
+    private String test(){
+        return "hello text";
     }
 }
