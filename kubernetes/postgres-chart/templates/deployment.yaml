@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.postgres.deploymentName }}
+  name: postgres-deployment
   labels:
-    app: {{ .Values.postgres.postgres.app }}
-    tier: {{ .Values.postgres.postgres.tier }}
+    app: postgres
+    tier: postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.postgres.postgres.app }}
-      tier: {{ .Values.postgres.postgres.tier }}
+      app: postgres
+      tier: postgres
   template:
     metadata:
       labels:
-        app: {{ .Values.postgres.postgres.app }}
-        tier: {{ .Values.postgres.postgres.tier }}
+        app: postgres
+        tier: postgres
     spec:
       containers:
-        - name: {{ .Values.postgres.name }}
-          image: {{ .Values.postgres.image }}:{{ .Values.postgres.tag }}
+        - name: postgres-db
+          image: postgres:latest
           ports:
-              - containerPort: {{ .Values.postgres.port }}
+              - containerPort: 5432
           env:
             - name: POSTGRES_DB
               value: postgres
@@ -29,4 +29,4 @@ spec:
               value: postgres
             - name: POSTGRES_PASSWORD
               value: postgres
-      restartPolicy: {{ .Values.postgres.restartPolicy }}
+      restartPolicy: Always
