@@ -3,10 +3,10 @@ name: docker-build-and-push
 on:
   push:
     branches:
-      - 'master'
+      - 'kubernetes'
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,3 +21,20 @@ jobs:
         run: |
           docker build -t kixer/backend ./backend
           docker push kixer/backend
+  deploy:
+        needs: build
+        runs-on:
+            - self-hosted
+            - label-1
+        steps:
+            - uses: actions/checkout@v2
+            
+            - name: Run scripts
+              run: |
+                cd ../CICD-Project
+                git pull origin kubernetes
+                git checkout kubernetes
+                cd kubernetes
+                helm upgrade --install postgres-chart postgres-chart
+                helm upgrade --install backend-chart backend-chart
+                kubectl rollout restart deployment backenddeployment
