@@ -19,5 +19,5 @@ jobs:
       -
         name: Build and push
         run: |
-          docker build -t kixer/backend ./backend
-          docker push kixer/backend
+          docker build -t kixer/backend-docker ./backend
+          docker push kixer/backend-docker
