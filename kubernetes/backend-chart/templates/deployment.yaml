@@ -23,35 +23,10 @@ spec:
           ports:
               - containerPort: {{ .Values.backend.port }}
           env:
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-config
-                  key: DB_HOST
-            - name: DB_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-config
-                  key: DB_PORT
-            - name: DB_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-config
-                  key: DB_NAME
-            - name: DB_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-config
-                  key: DB_USER
-            - name: DB_PASS
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-config
-                  key: DB_PASS
-          volumeMounts:
-            - name: config-volume
-              mountPath: /config
-      volumes:
-        - name: config-volume
-          configMap:
-            name: postgres-config
+            - name: POSTGRES_DB
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+      restartPolicy: {{ .Values.backend.restartPolicy }}
