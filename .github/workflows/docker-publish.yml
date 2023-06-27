@@ -32,7 +32,7 @@ jobs:
             - name: Run scripts
               run: |
                 cd ../CICD-Project
-                git pull
+                git pull origin kubernetes
                 git checkout kubernetes
                 cd kubernetes
                 helm upgrade --install postgres-chart postgres-chart
