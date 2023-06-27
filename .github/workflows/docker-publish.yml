@@ -6,7 +6,7 @@ on:
       - 'master'
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,3 +21,18 @@ jobs:
         run: |
           docker build -t kixer/backend-docker ./backend
           docker push kixer/backend-docker
+  deploy:
+        needs: build
+        runs-on:
+            - self-hosted
+            - label-1
+        steps:
+            - uses: actions/checkout@v2
+            
+            - name: Run scripts
+              run: |
+                cd ../CICD-Project
+                git pull origin master
+                git checkout master
+                cd backend
+                docker-compose up
