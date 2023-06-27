@@ -9,7 +9,3 @@ backend:
   service:
     name: backendservice
     port: 8080
-  configMap:
-    enabled: true
-    name: postgres-config
-    mountPath: /app/config
