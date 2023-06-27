@@ -34,7 +34,7 @@ jobs:
                 cd ../CICD-Project
                 git pull
                 git checkout kubernetes
-                cd kubernetes
+                cd CICD-Project/kubernetes/
                 helm upgrade --install postgres-chart postgres
                 helm upgrade --install backend-chart backend
                 kubectl rollout restart deployment backenddeployment
