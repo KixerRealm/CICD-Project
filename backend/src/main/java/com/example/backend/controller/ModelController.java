@@ -31,6 +31,6 @@ public class ModelController {
 
     @GetMapping("/test")
     private String test(){
-        return "hello text";
+        return "hello text 123";
     }
 }
